@@ -38,47 +38,47 @@ def get_prediction(study_hours, attendance, previous_score):
                 
             return result_html, imp_text
         else:
-            return f"❌ Error: {response.text}", ""
+            return f"Error: {response.text}", ""
     except Exception as e:
-        return f"❌ Backend Connection Error: {str(e)}", ""
+        return f"Backend Connection Error: {str(e)}", ""
 
 def reset_inputs():
     """Resets all sliders and outputs."""
     return 6.0, 75.0, 50.0, "", ""
 
 # --- Gradio UI Layout ---
-with gr.Blocks(title="Student Performance Predictor 2.0") as demo:
+with gr.Blocks(title="Student Performance Predictor") as demo:
     gr.HTML("""
     <div style="text-align: center; padding: 10px;">
-        <h1 style="color: #2D3E50;">🎓 Student Pass/Fail Predictor 2.0</h1>
-        <p style="font-size: 1.1em; color: #5F6368;">Predict academic outcomes using machine learning logic.</p>
+        <h1 style="color: #2D3E50;">Student Pass/Fail Predictor</h1>
+        <p style="font-size: 1.1em; color: #5F6368;">Predict academic outcomes using professional machine learning logic.</p>
     </div>
     """)
     
     with gr.Row():
         # LEFT COLUMN: Inputs
         with gr.Column(scale=1):
-            gr.Markdown("### 🛠️ Input Parameters")
+            gr.Markdown("### Input Parameters")
             study_slider = gr.Slider(0, 12, value=6, step=0.1, label="Study Hours / Day")
             attendance_slider = gr.Slider(0, 100, value=75, step=1, label="Attendance %")
             score_slider = gr.Slider(0, 100, value=50, step=1, label="Previous Exam Score")
             
             with gr.Row():
-                predict_btn = gr.Button("🚀 Predict Now", variant="primary")
-                reset_btn = gr.Button("🔄 Reset Inputs")
+                predict_btn = gr.Button("Predict Now", variant="primary")
+                reset_btn = gr.Button("Reset Inputs")
 
         # RIGHT COLUMN: Results & Insights
         with gr.Column(scale=1):
-            gr.Markdown("### 📊 Prediction Results")
+            gr.Markdown("### Prediction Results")
             result_display = gr.HTML(label="Result Area")
             importance_display = gr.Markdown(label="Feature Importance")
 
     # SECOND ROW: Visualization & Explanation
     with gr.Row():
-        with gr.Accordion("🧠 How it Works: The Decision Tree", open=False):
+        with gr.Accordion("How it Works: The Decision Tree", open=False):
             gr.Markdown("""
-            The model uses a **Decision Tree Classifier** to find patterns in student behavior. 
-            It asks a series of 'Yes/No' questions (e.g., *Is attendance > 80%?*) to reach a final prediction.
+            The model uses a Decision Tree Classifier to find patterns in student behavior. 
+            It asks a series of logical intersections (e.g., Is attendance > 80%?) to reach a final prediction.
             Below is the actual visualization of the logic currently powering this system:
             """)
             if os.path.exists("tree_plot.png"):

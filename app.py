@@ -6,7 +6,7 @@ import os
 
 # Initialize FastAPI app
 app = FastAPI(
-    title="Enhanced Student Prediction API",
+    title="Student Prediction API",
     description="Backend for Student Pass/Fail prediction using Decision Tree",
     version="2.0"
 )

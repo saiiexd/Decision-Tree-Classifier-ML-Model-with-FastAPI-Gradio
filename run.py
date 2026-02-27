@@ -5,16 +5,16 @@ import os
 
 def main():
     print("="*40)
-    print("   STUDENT PREDICTION SYSTEM 2.0   ")
+    print("   STUDENT PREDICTION SYSTEM   ")
     print("="*40)
 
-    # 1. Force Training (Ensures images and metadata are fresh)
+    # 1. Initialization
     print("\n[1/3] Initializing ML Model...")
     try:
         subprocess.run([sys.executable, "train_model.py"], check=True)
-        print("✅ Model trained and visualization generated.")
+        print("Model trained and visualization generated.")
     except Exception as e:
-        print(f"❌ Training failed: {e}")
+        print(f"Training failed: {e}")
         return
 
     # 2. Start FastAPI Backend
@@ -30,9 +30,9 @@ def main():
     # Wait for backend to be ready
     time.sleep(4)
     if backend_proc.poll() is not None:
-        print("❌ Backend failed to start. Check if port 8000 is occupied.")
+        print("Backend failed to start. Check if port 8000 is occupied.")
         return
-    print("✅ Backend running at http://127.0.0.1:8000")
+    print("Backend running at http://127.0.0.1:8000")
 
     # 3. Start Gradio Frontend
     print("\n[3/3] Launching Gradio UI...")
@@ -43,7 +43,7 @@ def main():
         print("\nStopping application...")
     finally:
         backend_proc.terminate()
-        print("Backend stopped. Goodbye!")
+        print("Backend stopped. Process complete.")
 
 if __name__ == "__main__":
     main()
